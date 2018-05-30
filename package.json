@@ -1,7 +1,7 @@
 {
   "name": "gtrend",
-  "version": "0.0.2",
-  "description": "Get github trending repositories info into your terminal",
+  "version": "0.0.3",
+  "description": "Get Github trending repositories data into your terminal",
   "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,11 +21,25 @@
   "author": "Nicolas Borboën <ponsfrilus@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "command-line-args": "^5.0.2",
+    "command-line-usage": "^5.0.5",
     "marked-man": "^0.2.1",
     "opn": "^5.3.0",
     "ora": "^2.1.0",
     "strip-ansi": "^4.0.0",
     "terminal-kit": "git://github.com/epfl-sti/terminal-kit.git#master",
-    "trending-github": "^1.0.2"
-  }
+    "trending-github": "git://github.com/ponsfrilus/trending-github.git#master"
+  },
+  "directories": {
+    "doc": "doc"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ponsfrilus/gtrend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ponsfrilus/gtrend/issues"
+  },
+  "homepage": "https://github.com/ponsfrilus/gtrend#readme"
 }
