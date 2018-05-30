@@ -1,15 +1,54 @@
-.TH "TEST" "" "May 2018" "" ""
+.TH "GTREND" "1" "May 2018" "v0.0.3" "GitHub Utilities"
 .SH "NAME"
-\fBTest\fR
+\fBgtrend\fR \- GitHub trending repo into terminal
+.SH SYNOPSIS
 .P
-https://
-.SH Sutitre
+gtrend [OPTION]\.\.\.
+.SH DESCRIPTION
 .P
-sdfkjdsf
-.SS slkdfjdkfjg
-.TH "HELP" "" "May 2018" "" ""
-.SH "NAME"
-\fBHELP\fR
+\fBgtrend\fP use \fBtrending\-github\fP and \fBterminal\-kit\fP to fetch GitHub trending repositories and display them into your terminal\.
+.SH OPTIONS
 .P
-assldak
+.RS 2
+.nf
+\-h, \-\-help              Display this usage guide\.
+\-n, \-\-num number        Number of items to display, default to 10\.
+\-t, \-\-timespan string   Time span of repositories [ 'daily', 'weekly', 'monthly' ], default to daily\.
+\-s, \-\-sort string       Sort repositories [ 'default', 'stars', 'forks' ]\.
+\-l, \-\-language string   Specify a language, e\.g\. JavaScript, default to all\.
+\-b, \-\-browser string    Specify a browser, e\.g\. firefox or google\-chrome\.
+.fi
+.RE
+.SH INSTALLATION
+.P
+From the npm registry \fIhttps://npmjs\.com\fR:
+.RS 0
+.IP \(bu 2
+locally (\fB\-\-save\fP, \fB\-\-save\-dev\fP, or \fB\-\-save\-optional\fP add \fBgtrend\fP to your \fBpackage\.json\fP file)
+  npm install gtrend [\-\-save|\-\-save\-dev|\-\-save\-optional]
+  npm link
+.IP \(bu 2
+globally (puts \fBgtrend\fP in your system's path):
+  [sudo] npm i gtrend \-g
+
+.RE
+.SH USAGE
+.RS 0
+.IP \(bu 2
+Typical Example  
+  \fBgtrend \-l javascript\fP
+.IP \(bu 2
+Full Example  
+  \fBgtrend \-n 15 \-t monthly \-l ruby\fP
+
+.RE
+.SH INFO
+.P
+Project home \fIhttps://github\.com/ponsfrilus/gtrend\fR
+.SH SEE ALSO
+.P
+@ponsfrilus \fIhttps://github\.com/ponsfrilus\fR
+.SH REPORTING BUGS
+.P
+See gtrend repository \fIhttps://github\.com/ponsfrilus/gtrend/issues\fR\|\.
 
