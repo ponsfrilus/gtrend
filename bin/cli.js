@@ -1,19 +1,106 @@
 #! /usr/bin/env node
-const trending    = require( 'trending-github' )
-const term        = require( 'terminal-kit' ).terminal
-const ora         = require( 'ora' )
-const spinner     = ora( 'Loading repos' )
-const opn         = require( 'opn' )
-const stripAnsi   = require( 'strip-ansi' ) ;
+const trending          = require( 'trending-github' )
+const term              = require( 'terminal-kit' ).terminal
+const ora               = require( 'ora' )
+const spinner           = ora( 'Loading repos' )
+const opn               = require( 'opn' )
+const stripAnsi         = require( 'strip-ansi' )
+
+// variables
+let items = []
+let opnopt = {} // app: 'firefox' / app: 'google-chrome'
+
+// CLI and validate args
+const cliArgs           = require('command-line-args')
+const cliUsage          = require('command-line-usage')
+const optionDefinitions = [
+  {
+    name: 'help',
+    alias: 'h',
+    type: Boolean,
+    description: 'Display this usage guide.'
+  },
+  {
+    name: 'num',
+    alias: 'n',
+    type: Number,
+    description: 'Number of items to display, default to 10.',
+    defaultValue: 10
+  },
+  {
+    name: 'timespan',
+    alias: 't',
+    type: String,
+    defaultOption: true,
+    defaultValue: 'daily',
+    description: 'Time span of repositories [ \'daily\', \'weekly\', \'monthly\' ], default to daily.'
+  },
+  {
+    name: 'sort',
+    alias: 's',
+    type: String,
+    defaultValue: 'starstoday',
+    description: 'Sort repositories [ \'starstoday\', \'stars\', \'forks\' ], default to starstoday.'
+  },
+  {
+    name: 'language',
+    alias: 'l',
+    type: String,
+    description: 'Specify a language, e.g. JavaScript, default to all.'
+  },
+  {
+    name: 'browser',
+    alias: 'b',
+    type: String,
+    description: 'Specify a browser, e.g. firefox or google-chrome.'
+  }
+]
+const options = cliArgs(optionDefinitions)
+const usage   = cliUsage([
+  {
+    header: 'Typical Example',
+    content: 'gtrend -l javascript'
+  },
+  {
+    header: 'Full Example',
+    content: 'gtrend -n 15 -t monthly -l ruby -s stars'
+  },
+  {
+    header: 'Options',
+    optionList: optionDefinitions
+  },
+  {
+    header: 'Info',
+    content: 'Project home: {underline https://github.com/ponsfrilus/gtrend}\n' +
+             'Project issues: {underline https://github.com/ponsfrilus/gtrend/issues}\n' +
+             'Project author: {underline https://github.com/ponsfrilus}'
+  }
+])
+if ( options.help ) {
+  console.log(usage)
+  process.exit()
+}
+if ( ![ 'daily', 'weekly', 'monthly' ].includes(options.timespan) ) {
+  console.log(usage)
+  console.log('\n'+term.str.red('!!! Time span should be one of \'daily\', \'weekly\' or \'monthly\' !!!')+'\n')
+  process.exit()
+}
+if ( ![ 'starstoday', 'stars', 'forks' ].includes(options.sort) ) {
+  console.log(usage)
+  console.log('\n'+term.str.red('!!! Sort option should be one of \'default\', \'stars\' or \'forks\' !!!')+'\n')
+  process.exit()
+}
+if (options.browser) {
+  opnopt.app = options.browser
+}
+
+console.log(options)
+//process.exit()
+
 //https://stackoverflow.com/a/36247412/960623
 const leftPad  = (s, c, n) =>{ s = s.toString(); c = c.toString(); return stripAnsi(s).length > n ? s : c.repeat(n - stripAnsi(s).length) + s; }
 const rightPad = (s, c, n) =>{ s = s.toString(); c = c.toString(); return stripAnsi(s).length > n ? s : s + c.repeat(n - stripAnsi(s).length); }
 
-let freq = 'daily'
-let prog = ''
-let list = 10
-let items = []
-let opnopt = { wait: false } // {app: 'firefox'}
 
 // Define exits
 function terminate() {
@@ -40,7 +127,7 @@ term.cyan(
 // debug
 //term( 'The terminal size is %dx%d' , term.width , term.height ) ;
 
-var opt = {
+let opt = {
   leftPadding: '  ',
   selectedLeftPadding: '▸ ',
   submittedLeftPadding: '▹  ',
@@ -49,7 +136,7 @@ var opt = {
   y: 9,
 }
 
-trending(freq, prog)
+trending(options.timespan, options.language)
   .then( spinner.start() )
   .then(
     function (repos) {
@@ -58,7 +145,10 @@ trending(freq, prog)
     }
   )
   .then(function (repos) {
-    repos = repos.slice( 0, list )
+    // sorting things up
+    repos.sort((a, b) => b[options.sort] - a[options.sort] )
+    // tailing returned data
+    repos = repos.slice( 0, options.num )
     i = 0
     repos.forEach( (e) => {
       i++
