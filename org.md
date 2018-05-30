@@ -21,6 +21,9 @@
   * https://github.com/flatiron/prompt
 
 ## Parsing args
+
+https://stackoverflow.com/a/34782300/960623
+
   * https://github.com/mattallty/Caporal.js
   * https://github.com/esatterwhite/node-seeli
   * https://www.npmjs.com/package/docopt
@@ -59,9 +62,13 @@
 
 ## Man page
 https://gist.github.com/eiri/6630762
+
+rm doc/gtrend.1 && marked-man --version v0.0.3 --manual 'GitHub Utilities' doc/MAN.md > doc/gtrend.1 && man gtrend
+
+
 ```bash
 $ npm install marked-man -g
-$ marked-man MAN.md > doc/gtrend.1
+$ marked-man doc/MAN.md > doc/gtrend.1
 ```
 
 Now add into package.json
