@@ -1,0 +1,31 @@
+{
+  "name": "gtrend",
+  "version": "0.0.2",
+  "description": "Get github trending repositories info into your terminal",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "gtrend": "bin/cli.js"
+  },
+  "man": [
+    "./doc/gtrend.1"
+  ],
+  "keywords": [
+    "github",
+    "trending",
+    "terminal",
+    "cli"
+  ],
+  "author": "Nicolas Borboën <ponsfrilus@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "marked-man": "^0.2.1",
+    "opn": "^5.3.0",
+    "ora": "^2.1.0",
+    "strip-ansi": "^4.0.0",
+    "terminal-kit": "git://github.com/epfl-sti/terminal-kit.git#master",
+    "trending-github": "^1.0.2"
+  }
+}
