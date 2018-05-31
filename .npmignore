@@ -2,3 +2,5 @@ node_modules
 bin/test
 org.md
 doc/MAN.md
+cache/_gtrend*
+doc/gtrend.gif
