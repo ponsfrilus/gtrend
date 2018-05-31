@@ -2,13 +2,20 @@
 const trending          = require( 'trending-github' )
 const term              = require( 'terminal-kit' ).terminal
 const ora               = require( 'ora' )
-const spinner           = ora( 'Loading repos' )
+const spinner           = ora( 'Loading repos...' )
 const opn               = require( 'opn' )
 const stripAnsi         = require( 'strip-ansi' )
-
+const fs                = require('fs')
+const path              = require('path')
 // variables
-let items = []
-let opnopt = {} // app: 'firefox' / app: 'google-chrome'
+let items               = []
+let opnopt              = {} // app: 'firefox' / app: 'google-chrome'
+let D                   = new Date()
+let y                   = D.getFullYear()
+let m                   = ( '00' + D.getMonth()+1).substr(-2,2); 
+let d                   = D.getDate()
+let filecache           = '_gtrend_' + y + m + d + '_'
+
 
 // CLI and validate args
 const cliArgs           = require('command-line-args')
@@ -55,8 +62,8 @@ const optionDefinitions = [
     description: 'Specify a browser, e.g. firefox or google-chrome.'
   }
 ]
-const options = cliArgs(optionDefinitions)
-const usage   = cliUsage([
+const options           = cliArgs( optionDefinitions )
+const usage             = cliUsage([
   {
     header: 'Typical Example',
     content: 'gtrend -l javascript'
@@ -93,8 +100,9 @@ if ( ![ 'starstoday', 'stars', 'forks' ].includes(options.sort) ) {
 if (options.browser) {
   opnopt.app = options.browser
 }
-
-console.log(options)
+filecache += options.timespan + '_' + options.sort + ((typeof options.language === 'undefined') ? '' : '_' + options.language)
+const filepath = path.join(__dirname, '../cache/' + filecache)
+//console.log(filepath)
 //process.exit()
 
 //https://stackoverflow.com/a/36247412/960623
@@ -125,7 +133,7 @@ term.cyan(
   '\n' )
 
 // debug
-//term( 'The terminal size is %dx%d' , term.width , term.height ) ;
+//term( 'The terminal size is %dx%d' , term.width , term.height )
 
 let opt = {
   leftPadding: '  ',
@@ -136,37 +144,62 @@ let opt = {
   y: 9,
 }
 
-trending(options.timespan, options.language)
-  .then( spinner.start() )
-  .then(
-    function (repos) {
-      spinner.succeed()
-      return repos
-    }
-  )
-  .then(function (repos) {
-    // sorting things up
-    repos.sort((a, b) => b[options.sort] - a[options.sort] )
-    // tailing returned data
-    repos = repos.slice( 0, options.num )
-    i = 0
-    repos.forEach( (e) => {
-      i++
-      let entry1 = leftPad( i, ' ', 2 ) + '. '
-      entry1 += leftPad( e.stars + '☆ ', ' ', 7 ) + ''
-      entry1 += rightPad( e.forks + '⑂ ', ' ', 6 ) + ''
-      entry1 += e.name
-      entry1 += ' (@' + e.author + ( ( e.language == '' ) ? ')': '/' + e.language + ')' )
-      entry1 = rightPad( entry1, ' ', 80 )
-      let entry2 = e.description || ''
-      items.push( entry1 + entry2 )
-    })
-
-    var menu = term.singleColumnMenu( items , opt ) ;
-    menu.on( 'submit' , data => {
-      term.saveCursor() ;
-      term.restoreCursor() ;
-      menu.cancel() ;
-      opn( repos[data.selectedIndex]['href'], opnopt)
-    })
+function display (repos) {
+  // tailing returned data
+  repos = repos.slice( 0, options.num )
+  i = 0
+  repos.forEach( (e) => {
+    i++
+    let entry1 = leftPad( i, ' ', 2 ) + '. '
+    entry1 += leftPad( e.stars + '☆ ', ' ', 7 ) + ''
+    entry1 += rightPad( e.forks + '⑂ ', ' ', 6 ) + ''
+    entry1 += e.name
+    entry1 += ' (@' + e.author + ( ( e.language == '' ) ? ')': '/' + e.language + ')' )
+    entry1 = rightPad( entry1, ' ', 80 )
+    let entry2 = e.description || ''
+    items.push( entry1 + entry2 )
   })
+
+  var menu = term.singleColumnMenu( items , opt )
+  menu.on( 'submit' , data => {
+    term.saveCursor()
+    term.restoreCursor()
+    menu.cancel()
+    opn( repos[data.selectedIndex]['href'], opnopt)
+  })
+}
+
+// Save all repo to a file
+function writeCache(repos) {
+  fs.writeFile(filepath,
+    JSON.stringify(repos, null, 2),
+    (err) => { if (err) throw err }
+  )
+}
+
+// Read requests in a file if possible
+function readCache() {
+  try {
+    fs.readFile(filepath, 'utf8', function (err, data) {
+      if (err) { return false } else { return data }
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+if (repos = readCache()) {
+  spinner.succeed( 'Repos loaded from cache' )
+  display(JSON.parse(repos))
+} else {
+  trending(options.timespan, options.language)
+    .then(
+      function (grepos) {
+        spinner.succeed( 'Repos loaded' )
+        // sorting things up
+        grepos.sort((a, b) => b[options.sort] - a[options.sort] )
+        writeCache(grepos)
+        display(grepos)
+      }
+    )
+}
