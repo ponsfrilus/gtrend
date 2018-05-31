@@ -19,7 +19,7 @@ OPTIONS
     -h, --help              Display this usage guide.
     -n, --num number        Number of items to display, default to 10.
     -t, --timespan string   Time span of repositories [ 'daily', 'weekly', 'monthly' ], default to daily.
-    -s, --sort string       Sort repositories [ 'default', 'stars', 'forks' ].
+    -s, --sort string       Sort repositories [ 'dailystars', 'stars', 'forks' ].
     -l, --language string   Specify a language, e.g. JavaScript, default to all.
     -b, --browser string    Specify a browser, e.g. firefox or google-chrome.
 
@@ -49,7 +49,7 @@ USAGE
 
 * Full Example  
 
-    `gtrend -n 15 -t monthly -l ruby`
+    `gtrend -n 15 -t monthly -s stars -l ruby -b google-chrome`
 
 
 INFO
