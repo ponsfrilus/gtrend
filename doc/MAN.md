@@ -22,6 +22,7 @@ OPTIONS
     -s, --sort string       Sort repositories [ 'dailystars', 'stars', 'forks' ].
     -l, --language string   Specify a language, e.g. JavaScript, default to all.
     -b, --browser string    Specify a browser, e.g. firefox or google-chrome.
+    --nocache               (re)Load repo from GitHub, renewing cache.
 
 
 
@@ -61,7 +62,7 @@ INFO
 SEE ALSO
 --------
 
-[@ponsfrilus](https://github.com/ponsfrilus)
+[ponsfrilus](https://github.com/ponsfrilus)
 
 
 REPORTING BUGS

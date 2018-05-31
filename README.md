@@ -22,6 +22,7 @@ gTrend fetch GitHUb trending repositories and display them into your terminal.
                           default to starstoday.                                
   -l, --language string   Specify a language, e.g. JavaScript, default to all.  
   -b, --browser string    Specify a browser, e.g. firefox or google-chrome.
+  --nocache               (re)Load repo from GitHub, renewing cache.
 ```
 
 ## Examples
@@ -56,6 +57,7 @@ The command default are:
 
 # LOGS
 
+  * v0.0.5  Quick fixes, `--nocache` option
   * v0.0.4  Cache, better README
   * v0.0.3  CLI args (sorting, language, timespan, etc...) are now ok
   * v0.0.2  Basic but functional version

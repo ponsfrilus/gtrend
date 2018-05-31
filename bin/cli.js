@@ -7,14 +7,12 @@ const opn               = require( 'opn' )
 const stripAnsi         = require( 'strip-ansi' )
 const fs                = require('fs')
 const path              = require('path')
+const dayjs             = require('dayjs')
 // variables
 let items               = []
 let opnopt              = {} // app: 'firefox' / app: 'google-chrome'
-let D                   = new Date()
-let y                   = D.getFullYear()
-let m                   = ( '00' + D.getMonth()+1).substr(-2,2); 
-let d                   = D.getDate()
-let filecache           = '_gtrend_' + y + m + d + '_'
+let D                   = dayjs().format('YYYYMMDD')
+let filecache           = '_gtrend_' + D + '_'
 
 
 // CLI and validate args
@@ -60,6 +58,11 @@ const optionDefinitions = [
     alias: 'b',
     type: String,
     description: 'Specify a browser, e.g. firefox or google-chrome.'
+  },
+  {
+    name: 'nocache',
+    type: Boolean,
+    description: '(re)Load repo from GitHub, renewing cache.'
   }
 ]
 const options           = cliArgs( optionDefinitions )
@@ -102,8 +105,6 @@ if (options.browser) {
 }
 filecache += options.timespan + '_' + options.sort + ((typeof options.language === 'undefined') ? '' : '_' + options.language)
 const filepath = path.join(__dirname, '../cache/' + filecache)
-//console.log(filepath)
-//process.exit()
 
 //https://stackoverflow.com/a/36247412/960623
 const leftPad  = (s, c, n) =>{ s = s.toString(); c = c.toString(); return stripAnsi(s).length > n ? s : c.repeat(n - stripAnsi(s).length) + s; }
@@ -144,7 +145,7 @@ let opt = {
   y: 9,
 }
 
-function display (repos) {
+function display(repos) {
   // tailing returned data
   repos = repos.slice( 0, options.num )
   i = 0
@@ -165,7 +166,7 @@ function display (repos) {
     term.saveCursor()
     term.restoreCursor()
     menu.cancel()
-    opn( repos[data.selectedIndex]['href'], opnopt)
+    opn( repos[data.selectedIndex]['href'], opnopt )
   })
 }
 
@@ -178,28 +179,27 @@ function writeCache(repos) {
 }
 
 // Read requests in a file if possible
-function readCache() {
-  try {
-    fs.readFile(filepath, 'utf8', function (err, data) {
-      if (err) { return false } else { return data }
-    })
-  } catch (err) {
-    console.log(err)
+function readCache(filepath) {
+  if (fs.existsSync(filepath)) {
+    return JSON.parse( fs.readFileSync(filepath, 'utf8') )
+  } else {
+    return false
   }
 }
+
 spinner.start()
-if (repos = readCache()) {
+if ( ( repos = readCache(filepath) ) && !options.nocache ) {
   spinner.succeed( 'Repos loaded from cache' )
-  display(JSON.parse(repos))
+  display(repos)
 } else {
   trending(options.timespan, options.language)
     .then(
-      function (grepos) {
+      function (repos) {
         spinner.succeed( 'Repos loaded' )
         // sorting things up
-        grepos.sort((a, b) => b[options.sort] - a[options.sort] )
-        writeCache(grepos)
-        display(grepos)
+        repos.sort((a, b) => b[options.sort] - a[options.sort] )
+        writeCache(repos)
+        display(repos)
       }
     )
 }
