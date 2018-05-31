@@ -56,6 +56,7 @@ The command default are:
 
 # LOGS
 
+  * v0.0.4  Cache, better README
   * v0.0.3  CLI args (sorting, language, timespan, etc...) are now ok
   * v0.0.2  Basic but functional version
   * v0.0.1  Basic tests with different libraries

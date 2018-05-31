@@ -1,4 +1,4 @@
-.TH "GTREND" "1" "May 2018" "v0.0.3" "GitHub Utilities"
+.TH "GTREND" "1" "May 2018" "v0.0.4" "GitHub Utilities"
 .SH "NAME"
 \fBgtrend\fR \- GitHub trending repo into terminal
 .SH SYNOPSIS
@@ -14,7 +14,7 @@ gtrend [OPTION]\.\.\.
 \-h, \-\-help              Display this usage guide\.
 \-n, \-\-num number        Number of items to display, default to 10\.
 \-t, \-\-timespan string   Time span of repositories [ 'daily', 'weekly', 'monthly' ], default to daily\.
-\-s, \-\-sort string       Sort repositories [ 'default', 'stars', 'forks' ]\.
+\-s, \-\-sort string       Sort repositories [ 'dailystars', 'stars', 'forks' ]\.
 \-l, \-\-language string   Specify a language, e\.g\. JavaScript, default to all\.
 \-b, \-\-browser string    Specify a browser, e\.g\. firefox or google\-chrome\.
 .fi
@@ -39,7 +39,7 @@ Typical Example
   \fBgtrend \-l javascript\fP
 .IP \(bu 2
 Full Example  
-  \fBgtrend \-n 15 \-t monthly \-l ruby\fP
+  \fBgtrend \-n 15 \-t monthly \-s stars \-l ruby \-b google\-chrome\fP
 
 .RE
 .SH INFO
