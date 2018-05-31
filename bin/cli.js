@@ -187,7 +187,7 @@ function readCache() {
     console.log(err)
   }
 }
-
+spinner.start()
 if (repos = readCache()) {
   spinner.succeed( 'Repos loaded from cache' )
   display(JSON.parse(repos))
