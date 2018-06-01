@@ -1,6 +1,6 @@
 {
   "name": "gtrend",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Get Github trending repositories data into your terminal",
   "main": "cli.js",
   "scripts": {
