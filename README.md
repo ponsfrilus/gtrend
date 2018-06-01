@@ -1,6 +1,9 @@
 # gTrend
 
-gTrend fetch GitHUb trending repositories and display them into your terminal.
+gTrend fetch GitHub trending repositories and display them into your terminal.
+
+Using <kbd>↑</kbd> and <kbd>↓</kbd> you can select a repository and open it in
+your browser by pressing <kbd>ENTER</kbd>.
 
 
 # Installation

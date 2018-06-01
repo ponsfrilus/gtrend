@@ -68,12 +68,12 @@ const optionDefinitions = [
 const options           = cliArgs( optionDefinitions )
 const usage             = cliUsage([
   {
-    header: 'Typical Example',
-    content: 'gtrend -l javascript'
+    header: 'Usage',
+    content: 'gtrend [OPTIONS]'
   },
   {
-    header: 'Full Example',
-    content: 'gtrend -n 15 -t monthly -l ruby -s stars'
+    header: 'Example',
+    content: 'gtrend -n 15 -t monthly -l JavaScript -s stars -b firefox'
   },
   {
     header: 'Options',
@@ -81,9 +81,9 @@ const usage             = cliUsage([
   },
   {
     header: 'Info',
-    content: 'Project home: {underline https://github.com/ponsfrilus/gtrend}\n' +
-             'Project issues: {underline https://github.com/ponsfrilus/gtrend/issues}\n' +
-             'Project author: {underline https://github.com/ponsfrilus}'
+    content: 'Home: {underline https://github.com/ponsfrilus/gtrend}\n' +
+             'Issue: {underline https://github.com/ponsfrilus/gtrend/issues}\n' +
+             'Author: {underline https://github.com/ponsfrilus}'
   }
 ])
 if ( options.help ) {

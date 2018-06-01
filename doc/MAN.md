@@ -4,13 +4,15 @@ gtrend(1) -- GitHub trending repo into terminal
 SYNOPSIS
 --------
 
-gtrend [OPTION]...
+gtrend [OPTIONS]...
 
 
 DESCRIPTION
 -----------
 
 `gtrend` use `trending-github` and `terminal-kit` to fetch GitHub trending repositories and display them into your terminal.
+
+Using ↑ and ↓ keys you can select a repository and open it in your browser by pressing ENTER.
 
 
 OPTIONS
