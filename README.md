@@ -53,6 +53,8 @@ The command default are:
   - [x] Sort repository by number of stars / forks
   - [x] Better man page
   - [ ] Run some tests
+  - [ ] `-v`, `--version` args opt
+  - [ ] Makefile + version management
 
 
 # LOGS
