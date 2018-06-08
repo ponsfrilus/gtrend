@@ -25,6 +25,7 @@ OPTIONS
     -l, --language string   Specify a language, e.g. JavaScript, default to all.
     -b, --browser string    Specify a browser, e.g. firefox or google-chrome.
     --nocache               (re)Load repo from GitHub, renewing cache.
+    -v, --version           Get the version.
 
 
 

@@ -8,12 +8,12 @@ const stripAnsi         = require( 'strip-ansi' )
 const fs                = require('fs')
 const path              = require('path')
 const dayjs             = require('dayjs')
+
 // variables
 let items               = []
 let opnopt              = {} // app: 'firefox' / app: 'google-chrome'
 let D                   = dayjs().format('YYYYMMDD')
 let filecache           = '_gtrend_' + D + '_'
-
 
 // CLI and validate args
 const cliArgs           = require('command-line-args')
@@ -63,6 +63,12 @@ const optionDefinitions = [
     name: 'nocache',
     type: Boolean,
     description: '(re)Load repo from GitHub, renewing cache.'
+  },
+  {
+    name: 'version',
+    alias: 'v',
+    type: Boolean,
+    description: 'Get the version.'
   }
 ]
 const options           = cliArgs( optionDefinitions )
@@ -90,6 +96,11 @@ if ( options.help ) {
   console.log(usage)
   process.exit()
 }
+if ( options.version ) {
+  v = require('../package.json').version
+  console.log('gTrend version ' + v + '\nhttps://github.com/ponsfrilus/gtrend/releases/tag/v'+ v )
+  process.exit()
+}
 if ( ![ 'daily', 'weekly', 'monthly' ].includes(options.timespan) ) {
   console.log(usage)
   console.log('\n'+term.str.red('!!! Time span should be one of \'daily\', \'weekly\' or \'monthly\' !!!')+'\n')
@@ -109,7 +120,6 @@ const filepath = path.join(__dirname, '../cache/' + filecache)
 //https://stackoverflow.com/a/36247412/960623
 const leftPad  = (s, c, n) =>{ s = s.toString(); c = c.toString(); return stripAnsi(s).length > n ? s : c.repeat(n - stripAnsi(s).length) + s; }
 const rightPad = (s, c, n) =>{ s = s.toString(); c = c.toString(); return stripAnsi(s).length > n ? s : s + c.repeat(n - stripAnsi(s).length); }
-
 
 // Define exits
 function terminate() {
@@ -133,15 +143,13 @@ term.cyan(
   '                    |____/ github trending repositories\n'   +
   '\n' )
 
-// debug
-//term( 'The terminal size is %dx%d' , term.width , term.height )
-
 let opt = {
   leftPadding: '  ',
   selectedLeftPadding: '▸ ',
   submittedLeftPadding: '▹  ',
   continueOnSubmit: true,
   itemMaxWidth: 80,
+  selectedStyle: term.dim.darkColor(1).bgGray,
   y: 9,
 }
 
@@ -151,11 +159,11 @@ function display(repos) {
   i = 0
   repos.forEach( (e) => {
     i++
-    let entry1 = leftPad( i, ' ', 2 ) + '. '
-    entry1 += leftPad( e.stars + '☆ ', ' ', 7 ) + ''
-    entry1 += rightPad( e.forks + '⑂ ', ' ', 6 ) + ''
-    entry1 += e.name
-    entry1 += ' (@' + e.author + ( ( e.language == '' ) ? ')': '/' + e.language + ')' )
+    let entry1 = leftPad( term.str.bold(i), ' ', 2 ) + '. '
+    entry1 += leftPad( term.str.bold(e.stars) + '☆ ', ' ', 7 ) + ''
+    entry1 += rightPad( term.str.bold(e.forks) + '⑂ ', ' ', 6 ) + ''
+    entry1 += term.str.cyan.bold(e.name)
+    entry1 += ' (' + term.str.blue.bold('@'+e.author) + ( ( e.language == '' ) ? ')': '/' + term.str.blue.bold(e.language) + ')' )
     entry1 = rightPad( entry1, ' ', 80 )
     let entry2 = e.description || ''
     items.push( entry1 + entry2 )

@@ -46,15 +46,15 @@ So, if you want to display 20 weekly trending repos sorted by stars and want to 
 
 The command default are:
 
-`gtrend -n 10 -t daily -s starstoday` wich is equivalent to `gtrend`.
+`gtrend -n 10 -t daily -s starstoday` which is equivalent to `gtrend`.
 
 
 # TODOS
 
   - [x] Add cli opt (daily, weekly, number of items, etc...)
-  - [ ] Implementation of `strip-ansi` in order to display line highlighting  
+  - [x] Implementation of `strip-ansi` in order to display line highlighting  
         correctly (https://github.com/cronvel/terminal-kit/issues/68)
-  - [ ] Add some local cache
+  - [x] Add some local cache
   - [x] Sort repository by number of stars / forks
   - [x] Better man page
   - [ ] Run some tests
@@ -64,6 +64,9 @@ The command default are:
 
 # LOGS
 
+  * v0.1.0  Thanks to [@cronvel](https://github.com/cronvel/terminal-kit/issues/68) highlighting of selected line is now perfect !
+  * v0.0.7  WIP Makefile
+  * v0.0.6  Tuning
   * v0.0.5  Quick fixes, `--nocache` option
   * v0.0.4  Cache, better README
   * v0.0.3  CLI args (sorting, language, timespan, etc...) are now ok
