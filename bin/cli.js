@@ -104,7 +104,7 @@ if ( options.help ) {
 }
 if ( options.version ) {
   v = require('../package.json').version
-  console.log('gTrend version ' + v + '\nhttps://github.com/ponsfrilus/gtrend/releases/tag/v'+ v )
+  console.log('gTrend version ' + v + '\nhttps://github.com/ponsfrilus/gtrend/releases/')
   process.exit()
 }
 if ( ![ 'daily', 'weekly', 'monthly' ].includes(options.timespan) ) {
