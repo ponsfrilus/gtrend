@@ -13,6 +13,7 @@ const dayjs             = require( 'dayjs' )
 let items               = []
 let opnopt              = {} // app: 'firefox' / app: 'google-chrome'
 let D                   = dayjs().format('YYYYMMDD')
+let cachedir            = path.join(__dirname, '../cache/')
 let filecache           = '_gtrend_' + D + '_'
 
 // CLI and validate args
@@ -65,6 +66,11 @@ const optionDefinitions = [
     description: '(re)Load repo from GitHub, renewing cache.'
   },
   {
+    name: 'clearcache',
+    type: Boolean,
+    description: 'Delete all previous cache files.'
+  },
+  {
     name: 'version',
     alias: 'v',
     type: Boolean,
@@ -114,8 +120,20 @@ if ( ![ 'starstoday', 'stars', 'forks' ].includes(options.sort) ) {
 if (options.browser) {
   opnopt.app = options.browser
 }
+
 filecache += options.timespan + '_' + options.sort + ((typeof options.language === 'undefined') ? '' : '_' + options.language)
-const filepath = path.join(__dirname, '../cache/' + filecache)
+const filepath = path.join(cachedir + filecache)
+
+if ( options.clearcache ) {
+  for ( const file of fs.readdirSync(cachedir) ) {
+    if ( file.substr(0, 7) == '_gtrend' ) {
+      fs.unlink( path.join(cachedir, file) , err => {
+        if (err) throw err
+      })
+    }
+  }
+  process.exit()
+}
 
 //https://stackoverflow.com/a/36247412/960623
 const leftPad  = (s, c, n) =>{ s = s.toString(); c = c.toString(); return stripAnsi(s).length > n ? s : c.repeat(n - stripAnsi(s).length) + s; }
