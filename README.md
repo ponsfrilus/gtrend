@@ -60,10 +60,14 @@ The command default are:
   - [ ] Run some tests
   - [ ] `-v`, `--version` args opt
   - [ ] Makefile + version management
+  - [ ] Remove old cache
+  - [ ] Old cache browsing and loading
+  - [ ] Add `cli` completion
 
 
 # LOGS
 
+  * v0.1.2  Old cache removal
   * v0.1.0  Thanks to [@cronvel](https://github.com/cronvel/terminal-kit/issues/68) highlighting of selected line is now perfect !
   * v0.0.7  WIP Makefile
   * v0.0.6  Tuning
