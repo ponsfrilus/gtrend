@@ -28,6 +28,8 @@ your browser by pressing <kbd>ENTER</kbd>.
   -l, --language string   Specify a language, e.g. JavaScript, default to all.  
   -b, --browser string    Specify a browser, e.g. firefox or google-chrome.
   --nocache               (re)Load repo from GitHub, renewing cache.
+  --clearcache            Delete all previous cache files.
+  -v, --version           Get the version.
 ```
 
 ## Examples
@@ -67,6 +69,7 @@ The command default are:
 
 # LOGS
 
+  * v0.1.3  Cache retrieving better handling
   * v0.1.2  Old cache removal
   * v0.1.0  Thanks to [@cronvel](https://github.com/cronvel/terminal-kit/issues/68) highlighting of selected line is now perfect !
   * v0.0.7  WIP Makefile
