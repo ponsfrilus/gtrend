@@ -5,9 +5,9 @@ const ora               = require( 'ora' )
 const spinner           = ora( 'Loading repos...' )
 const opn               = require( 'opn' )
 const stripAnsi         = require( 'strip-ansi' )
-const fs                = require('fs')
-const path              = require('path')
-const dayjs             = require('dayjs')
+const fs                = require( 'fs' )
+const path              = require( 'path' )
+const dayjs             = require( 'dayjs' )
 
 // variables
 let items               = []
