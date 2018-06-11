@@ -207,7 +207,12 @@ function writeCache(repos) {
 // Read requests in a file if possible
 function readCache(filepath) {
   if (fs.existsSync(filepath)) {
-    return JSON.parse( fs.readFileSync(filepath, 'utf8') )
+    try {
+      fromCache = JSON.parse( fs.readFileSync(filepath, 'utf8') )
+    } catch(error) {
+      return false
+    }
+    return fromCache
   } else {
     return false
   }
