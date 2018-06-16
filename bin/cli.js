@@ -220,17 +220,26 @@ function readCache(filepath) {
 
 spinner.start()
 if ( ( repos = readCache(filepath) ) && !options.nocache ) {
-  spinner.succeed( 'Repos loaded from cache' )
-  display(repos)
+  if (repos && repos.length) {
+    spinner.succeed( 'Repos loaded from cache' )
+    display(repos)
+  } else {
+    spinner.fail( 'Repos not loaded' )
+    console.log( 'Please try with the `--nocache` option to renew cache.' )
+  }
 } else {
   trending(options.timespan, options.language)
     .then(
       function (repos) {
-        spinner.succeed( 'Repos loaded' )
         // sorting things up
         repos.sort((a, b) => b[options.sort] - a[options.sort] )
-        writeCache(repos)
-        display(repos)
+        if (repos && repos.length) {
+          spinner.succeed( 'Repos loaded' )
+          writeCache(repos)
+          display(repos)
+        } else {
+          spinner.fail( 'Repos not loaded, please try again.' )
+        }
       }
     )
 }
