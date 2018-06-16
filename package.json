@@ -40,7 +40,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/ponsfrilus/gtrend.git"
+    "url": "https://gitlab.com/ponsfrilus/gtrend.git"
   },
   "bugs": {
     "url": "https://gitlab.com/ponsfrilus/gtrend/issues"
