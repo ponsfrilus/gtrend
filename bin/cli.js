@@ -45,8 +45,8 @@ const optionDefinitions = [
     name: 'sort',
     alias: 's',
     type: String,
-    defaultValue: 'starstoday',
-    description: 'Sort repositories [ \'starstoday\', \'stars\', \'forks\' ], default to starstoday.'
+    defaultValue: 'starsToday',
+    description: 'Sort repositories [ \'starsToday\', \'stars\', \'forks\' ], default to starsToday.'
   },
   {
     name: 'language',
@@ -112,7 +112,7 @@ if ( ![ 'daily', 'weekly', 'monthly' ].includes(options.timespan) ) {
   console.log('\n'+term.str.red('!!! Time span should be one of \'daily\', \'weekly\' or \'monthly\' !!!')+'\n')
   process.exit()
 }
-if ( ![ 'starstoday', 'stars', 'forks' ].includes(options.sort) ) {
+if ( ![ 'starsToday', 'stars', 'forks' ].includes(options.sort) ) {
   console.log(usage)
   console.log('\n'+term.str.red('!!! Sort option should be one of \'default\', \'stars\' or \'forks\' !!!')+'\n')
   process.exit()
