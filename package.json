@@ -35,6 +35,7 @@
     "doc": "doc"
   },
   "devDependencies": {
+    "mocha": "^5.2.0",
     "semver": "^5.5.0"
   },
   "repository": {
