@@ -1,6 +1,6 @@
 {
   "name": "gtrend",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Get Github trending repositories data into your terminal",
   "main": "cli.js",
   "scripts": {
@@ -40,10 +40,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ponsfrilus/gtrend.git"
+    "url": "git+https://gitlab.com/ponsfrilus/gtrend.git"
   },
   "bugs": {
-    "url": "https://github.com/ponsfrilus/gtrend/issues"
+    "url": "https://gitlab.com/ponsfrilus/gtrend/issues"
   },
-  "homepage": "https://github.com/ponsfrilus/gtrend#readme"
+  "homepage": "https://gitlab.com/ponsfrilus/gtrend#readme"
 }

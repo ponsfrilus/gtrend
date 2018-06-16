@@ -60,19 +60,19 @@ USAGE
 INFO
 ----
 
-[Project home](https://github.com/ponsfrilus/gtrend)
+[Project home](https://gitlab.com/ponsfrilus/gtrend)
 
 
 SEE ALSO
 --------
 
-[ponsfrilus](https://github.com/ponsfrilus)
+[ponsfrilus](https://gitlab.com/ponsfrilus)
 
 
 REPORTING BUGS
 --------------
 
-See [gtrend repository](https://github.com/ponsfrilus/gtrend/issues).
+See [gtrend repository](https://gitlab.com/ponsfrilus/gtrend/issues).
 
 
 [//]: # (rm doc/gtrend.1 && marked-man --version v0.0.3 --manual 'GitHub Utilities' doc/MAN.md > doc/gtrend.1 && man gtrend)

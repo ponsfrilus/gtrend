@@ -53,22 +53,15 @@ The command default are:
 
 # TODOS
 
-  - [x] Add cli opt (daily, weekly, number of items, etc...)
-  - [x] Implementation of `strip-ansi` in order to display line highlighting  
-        correctly (https://github.com/cronvel/terminal-kit/issues/68)
-  - [x] Add some local cache
-  - [x] Sort repository by number of stars / forks
-  - [x] Better man page
   - [ ] Run some tests
-  - [x] `-v`, `--version` args opt
   - [ ] Makefile + version management
-  - [x] Remove old cache
   - [ ] Old cache browsing and loading
   - [ ] Add `cli` completion
 
 
 # LOGS
 
+  * v0.1.5  Moving to GitLab
   * v0.1.4  Back to original trending-github package
   * v0.1.3  Cache retrieving better handling
   * v0.1.2  Old cache removal

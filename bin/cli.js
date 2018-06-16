@@ -93,9 +93,9 @@ const usage             = cliUsage([
   },
   {
     header: 'Info',
-    content: 'Home: {underline https://github.com/ponsfrilus/gtrend}\n' +
-             'Issue: {underline https://github.com/ponsfrilus/gtrend/issues}\n' +
-             'Author: {underline https://github.com/ponsfrilus}'
+    content: 'Home: {underline https://gitlab.com/ponsfrilus/gtrend}\n' +
+             'Issue: {underline https://gitlab.com/ponsfrilus/gtrend/issues}\n' +
+             'Author: {underline https://gitlab.com/ponsfrilus}'
   }
 ])
 if ( options.help ) {
@@ -104,7 +104,7 @@ if ( options.help ) {
 }
 if ( options.version ) {
   v = require('../package.json').version
-  console.log('gTrend version ' + v + '\nhttps://github.com/ponsfrilus/gtrend/releases/')
+  console.log('gTrend version ' + v + '\nhttps://gitlab.com/ponsfrilus/gtrend/tags')
   process.exit()
 }
 if ( ![ 'daily', 'weekly', 'monthly' ].includes(options.timespan) ) {
