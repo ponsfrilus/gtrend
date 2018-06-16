@@ -23,7 +23,7 @@ your browser by pressing <kbd>ENTER</kbd>.
   -n, --num number        Number of items to display, default to 10.            
   -t, --timespan string   Time span of repositories [ 'daily', 'weekly',        
                           'monthly' ], default to daily.                        
-  -s, --sort string       Sort repositories [ 'starstoday', 'stars', 'forks' ],
+  -s, --sort string       Sort repositories [ 'starsToday', 'stars', 'forks' ],
                           default to starstoday.                                
   -l, --language string   Specify a language, e.g. JavaScript, default to all.  
   -b, --browser string    Specify a browser, e.g. firefox or google-chrome.
@@ -48,7 +48,7 @@ So, if you want to display 20 weekly trending repos sorted by stars and want to 
 
 The command default are:
 
-`gtrend -n 10 -t daily -s starstoday` which is equivalent to `gtrend`.
+`gtrend -n 10 -t daily -s starsToday` which is equivalent to `gtrend`.
 
 
 # TODOS
@@ -60,15 +60,16 @@ The command default are:
   - [x] Sort repository by number of stars / forks
   - [x] Better man page
   - [ ] Run some tests
-  - [ ] `-v`, `--version` args opt
+  - [x] `-v`, `--version` args opt
   - [ ] Makefile + version management
-  - [ ] Remove old cache
+  - [x] Remove old cache
   - [ ] Old cache browsing and loading
   - [ ] Add `cli` completion
 
 
 # LOGS
 
+  * v0.1.4  Back to original trending-github package
   * v0.1.3  Cache retrieving better handling
   * v0.1.2  Old cache removal
   * v0.1.0  Thanks to [@cronvel](https://github.com/cronvel/terminal-kit/issues/68) highlighting of selected line is now perfect !
